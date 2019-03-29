@@ -13,8 +13,6 @@ namespace DamianWelLes.Models
 
         public string Description { get; set; }
 
-        public DateTime Endate { get; set; }
-
         public DateTime Date { get; set; }
     }
 }
