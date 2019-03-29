@@ -25,10 +25,18 @@ namespace DamianWelLes.Controllers
         }
 
         // POST: api/ToDo
-        public void Post(int Id, string Title, string Description )
+        public Todo Post(int Id, string Title, string Description, DateTime Date )
         {
+            Todo item = new Todo();
+            item.Id = Id;
+            item.Title = Title;
+            item.Description = Description;
+            item.Date = Date;
+            
+            //Creating of the file + Writing to it.
             WriteTextFile TodoList = new WriteTextFile();
-            TodoList.Main();
+            TodoList.Main(item);
+            return item;
         }
 
         // PUT: api/ToDo/5
@@ -43,7 +51,7 @@ namespace DamianWelLes.Controllers
 
         public class WriteTextFile
         {
-            public void Main()
+            public void Main(Todo item)
             {
                 string pathString = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 string fileName = Path.Combine(pathString, "TodoItemsList.txt");
@@ -69,27 +77,6 @@ namespace DamianWelLes.Controllers
                     Console.WriteLine("File \"{0}\" already exists.", fileName);
                     return;
                 }
-                //using (System.IO.StreamWriter file =
-                //    new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt"))
-                //{
-                //    foreach (string line in lines)
-                //    {
-                //        // If the line doesn't contain the word 'Second', write the line to the file.
-                //        if (!line.Contains("Second"))
-                //        {
-                //            file.WriteLine(line);
-                //        }
-                //    }
-                //}
-
-                //// Example #4: Append new text to an existing file.
-                //// The using statement automatically flushes AND CLOSES the stream and calls 
-                //// IDisposable.Dispose on the stream object.
-                //using (System.IO.StreamWriter file =
-                //    new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt", true))
-                //{
-                //    file.WriteLine("Fourth line");
-                //}
             }
         }
     }
